@@ -15,6 +15,9 @@ public class StudentTester {
         System.out.println("Actual:");
         System.out.println("first name: '"+ student2.getFirstName() +"', second name: '" + student2.getSecondName() + "', age: '" + student2.getAge() + "', " + "studentID: " + "'" + Student.studentID + "'");
 
+        System.out.println(student1.toString());
+        System.out.println(student2.toString());
+
         System.out.println("..Testing complete.");
     }
 }
