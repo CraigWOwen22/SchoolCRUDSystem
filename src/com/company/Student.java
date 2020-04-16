@@ -45,18 +45,22 @@ public class Student{
     Connection con = null;
     PreparedStatement ps = null;
 
+    //Add a student
     public void addStudent(){
+//        String query = " insert into student (student_name, student_surname, student_age)"
+//                + " values (?, ?, ?)";
 
-        String query = " insert into student (student_name, student_surname, student_age)"
-                + " values (?, ?, ?)";
+        String query = " insert into student (student_ID, student_name, student_surname, student_age)"
+               + " values (?, ?, ?, ?)";
 
         try{
             String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
             con = DriverManager.getConnection(url);
             ps = con.prepareStatement(query);
-            ps.setString(1,this.firstName);
-            ps.setString(2,this.secondName);
-            ps.setInt(3,this.age);
+            ps.setInt(1,studentID);
+            ps.setString(2,this.firstName);
+            ps.setString(3,this.secondName);
+            ps.setInt(4,this.age);
 
             ps.executeUpdate();
         }
@@ -68,9 +72,46 @@ public class Student{
         }
 
         System.out.println("Test: firstname: " + this.firstName + " secondname: " + this.secondName + " age: " + this.age);
+    }
 
+    //Search for a Student
+    public String searchStudent(int studentID){
+
+        String query = " SELECT * FROM student WHERE student_ID = ?";
+        String fName = "";
+        String sName = "";
+        int age = 0;
+
+        try{
+            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
+            con = DriverManager.getConnection(url);
+            ps = con.prepareStatement(query);
+            ps.setInt(1,studentID);
+
+            ResultSet result = ps.executeQuery();
+            fName = result.getString("student_name");
+            sName = result.getString("student_surname");
+            age = result.getInt("student_age");
+
+
+        }
+        catch(SQLException e){
+            System.out.println("Exception: " + e);
+        }
+        finally {
+            sqlCleanup(con,ps);
+        }
+
+        return "FirstName: " + fName + "SecondName: " + sName + "Age: " + age;
 
     }
+
+    //Update Student - try to use a branch in GIT
+
+
+
+
+
 
     public void sqlCleanup(Connection con, PreparedStatement ps){
         try{
