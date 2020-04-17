@@ -17,24 +17,26 @@ public class Main {
         switch(userChoice){
 
             case "1":
-                System.out.println("Please enter students name and press the enter key");
-                String firstName = scan.nextLine();
-                System.out.println("Please enter students name and press the enter key");
-                String secondName = scan.nextLine();
-                System.out.println("Please enter students name and press the enter key");
-                int age = scan.nextInt();
-
-                student = new Student(firstName, secondName, age);
-                student.addStudent();
+//                System.out.println("Please enter students name and press the enter key");
+//                String firstName = scan.nextLine();
+//                System.out.println("Please enter students name and press the enter key");
+//                String secondName = scan.nextLine();
+//                System.out.println("Please enter students name and press the enter key");
+//                int age = scan.nextInt();
+//
+//                student = new Student(firstName, secondName, age);
+//                student.addStudent();
 
             case "2":
                 //find a student
             case "3":
                 //Update a student
+                student = new Student();
+                System.out.println(student.updateStudent(1, "Craig", "Owen", 29));
+
             case "4":
                 //remove a student
-
-
+                //
         }
 
 

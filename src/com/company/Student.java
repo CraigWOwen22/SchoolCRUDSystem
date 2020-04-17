@@ -11,6 +11,10 @@ public class Student{
     private String secondName;
     private int age;
 
+    public Student(){
+
+    }
+
     public Student(String firstName, String secondName, int age){
         this.firstName = firstName;
         this.secondName = secondName;
@@ -46,9 +50,7 @@ public class Student{
     PreparedStatement ps = null;
 
     //Add a student
-    public void addStudent(){
-//        String query = " insert into student (student_name, student_surname, student_age)"
-//                + " values (?, ?, ?)";
+    /*public void addStudent(){
 
         String query = " insert into student (student_ID, student_name, student_surname, student_age)"
                + " values (?, ?, ?, ?)";
@@ -72,10 +74,10 @@ public class Student{
         }
 
         System.out.println("Test: firstname: " + this.firstName + " secondname: " + this.secondName + " age: " + this.age);
-    }
+    }*/
 
     //Search for a Student
-    public String searchStudent(int studentID){
+    /*public String searchStudent(int studentID){
 
         String query = " SELECT * FROM student WHERE student_ID = ?";
         String fName = "";
@@ -104,9 +106,47 @@ public class Student{
 
         return "FirstName: " + fName + "SecondName: " + sName + "Age: " + age;
 
+    }*/
+
+    //Update a Student
+
+    public String updateStudent(int userID, String firstName, String surname, int age){
+
+        StringBuilder query = new StringBuilder();
+
+        query.append("UPDATE student SET ");
+        if (firstName != ""){query.append("student_name = '?', ");}
+        if (surname != ""){query.append("student_surname = '?', ");}
+        if (age != 0){query.append("student_age = '?', ");}
+        query.setLength(Math.max(query.length() - 2, 0));
+        query.append(" WHERE student_ID = ?");
+
+
+//        String query = "UPDATE student SET student_name = '?', student_surname = '?', student_age = '?' WHERE student_ID = ?";
+
+//        try{
+//            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
+//            con = DriverManager.getConnection(url);
+//            ps = con.prepareStatement(query);
+//            ps.setString(1,this.firstName);
+//            ps.setString(2,this.secondName);
+//            ps.setInt(3,this.age);
+//
+//            ps.executeUpdate();
+//
+//
+//        }
+//        catch(SQLException e){
+//            System.out.println("Exception: " + e);
+//        }
+//        finally {
+//            sqlCleanup(con,ps);
+//        }
+
+        return query.toString();
+
     }
 
-    //Update Student
 
 
 
