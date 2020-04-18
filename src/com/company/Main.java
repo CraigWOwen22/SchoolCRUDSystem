@@ -32,7 +32,7 @@ public class Main {
             case "3":
                 //Update a student
                 student = new Student();
-                System.out.println(student.updateStudent(1, "Craig", "Owen", 29));
+//                System.out.println(student.updateStudent(1, "Craig", "Owen", 29));
 
             case "4":
                 //remove a student
