@@ -36,6 +36,7 @@ public class Main {
 
             case "4":
                 //remove a student
+                //use search then delete to ask the user if they are sure.
                 //
         }
 

@@ -50,7 +50,7 @@ public class Student{
     PreparedStatement ps = null;
 
     //Add a student
-    public void addStudent(){
+    /*public void addStudent(){
 
         String query = " insert into student (student_ID, student_name, student_surname, student_age)"
                + " values (?, ?, ?, ?)";
@@ -74,10 +74,10 @@ public class Student{
         }
 
         System.out.println("Test: firstname: " + this.firstName + " secondname: " + this.secondName + " age: " + this.age);
-    }
+    }*/
 
     //Search for a Student
-    public String searchStudent(int studentID){
+   /* public String searchStudent(int studentID){
 
         String query = " SELECT * FROM student WHERE student_ID = ?";
         String fName = "";
@@ -104,10 +104,10 @@ public class Student{
 
         return "FirstName: " + fName + "SecondName: " + sName + "Age: " + age;
 
-    }
+    }*/
 
     //Update a Student
-    public String updateStudent(int userID, String firstName, String surname, int age){
+   /* public String updateStudent(int userID, String firstName, String surname, int age){
 
 //        String query = "UPDATE student SET student_name = '?', student_surname = '?', student_age = '?' WHERE student_ID = ?";
 //
@@ -146,11 +146,28 @@ public class Student{
 
         return "Student added to DB";
 
-    }
+    }*/
 
     //Remove a student
-    public String removeStudent(){
-        return "";
+    public String removeStudent(int studentID){
+        String query = "DELETE FROM student WHERE student_ID = ?";
+
+        try{
+            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
+            con = DriverManager.getConnection(url);
+            ps = con.prepareStatement(query);
+            ps.setInt(1,studentID);
+
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Exception: " + e);
+        }
+        finally {
+            sqlCleanup(con,ps);
+        }
+        //possibly add a check to see if student was deletete
+        return "Student deleted";
     }
 
     public void sqlCleanup(Connection con, PreparedStatement ps){
