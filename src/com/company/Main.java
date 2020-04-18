@@ -14,24 +14,41 @@ public class Main {
         userChoice = scan.nextLine();
 
         Student student;
+        int studentID;
+        String firstName="", secondName="";
+        int age = 0;
         switch(userChoice){
 
             case "1":
-//                System.out.println("Please enter students name and press the enter key");
-//                String firstName = scan.nextLine();
-//                System.out.println("Please enter students name and press the enter key");
-//                String secondName = scan.nextLine();
-//                System.out.println("Please enter students name and press the enter key");
-//                int age = scan.nextInt();
-//
-//                student = new Student(firstName, secondName, age);
-//                student.addStudent();
+                System.out.println("Please enter students name and press the enter key");
+                firstName = scan.nextLine();
+                System.out.println("Please enter students name and press the enter key");
+                secondName = scan.nextLine();
+                System.out.println("Please enter students name and press the enter key");
+                age = scan.nextInt();
+                student = new Student(firstName, secondName, age);
+                student.addStudent();
 
-            case "2":
-                //find a student
+             case "2":
+                 System.out.println("Please enter students ID");
+                 studentID = scan.nextInt();
+                 student = new Student();
+                 student.searchStudent(studentID);
+
             case "3":
-                //Update a student
-                student = new Student();
+                System.out.println("Please enter students ID of which you would like to updated.");
+                studentID = scan.nextInt();
+                System.out.println("Please enter the new details of the student. Press enter to skip...");
+                System.out.println("Please enter the students new first name");
+                firstName = scan.nextLine();
+                System.out.println("Please enter the students new second name");
+                secondName = scan.nextLine();
+                System.out.println("Please enter the students new age");
+                age = scan.nextInt();
+
+                System.out.println("FirstName: " + firstName + " SecondName: " + secondName + " Age: " + age);
+
+
 //                System.out.println(student.updateStudent(1, "Craig", "Owen", 29));
 
             case "4":

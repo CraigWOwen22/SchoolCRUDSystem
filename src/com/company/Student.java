@@ -50,7 +50,7 @@ public class Student{
     PreparedStatement ps = null;
 
     //Add a student
-    /*public void addStudent(){
+    public void addStudent(){
 
         String query = " insert into student (student_ID, student_name, student_surname, student_age)"
                + " values (?, ?, ?, ?)";
@@ -74,10 +74,10 @@ public class Student{
         }
 
         System.out.println("Test: firstname: " + this.firstName + " secondname: " + this.secondName + " age: " + this.age);
-    }*/
+    }
 
     //Search for a Student
-   /* public String searchStudent(int studentID){
+    public void searchStudent(int studentID){
 
         String query = " SELECT * FROM student WHERE student_ID = ?";
         String fName = "";
@@ -102,12 +102,12 @@ public class Student{
             sqlCleanup(con,ps);
         }
 
-        return "FirstName: " + fName + "SecondName: " + sName + "Age: " + age;
+        System.out.println("FirstName: " + fName + "SecondName: " + sName + "Age: " + age);
 
-    }*/
+    }
 
     //Update a Student
-   /* public String updateStudent(int userID, String firstName, String surname, int age){
+    public void updateStudent(int userID, String firstName, String surname, int age){
 
 //        String query = "UPDATE student SET student_name = '?', student_surname = '?', student_age = '?' WHERE student_ID = ?";
 //
@@ -144,12 +144,12 @@ public class Student{
             sqlCleanup(con,ps);
         }
 
-        return "Student added to DB";
+        System.out.println("Student added to DB");
 
-    }*/
+    }
 
     //Remove a student
-    public String removeStudent(int studentID){
+    public void removeStudent(int studentID){
         String query = "DELETE FROM student WHERE student_ID = ?";
 
         try{
@@ -167,7 +167,7 @@ public class Student{
             sqlCleanup(con,ps);
         }
         //possibly add a check to see if student was deletete
-        return "Student deleted";
+        System.out.println("Student deleted");
     }
 
     public void sqlCleanup(Connection con, PreparedStatement ps){
