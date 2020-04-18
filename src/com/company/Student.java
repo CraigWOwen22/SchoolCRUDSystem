@@ -50,7 +50,7 @@ public class Student{
     PreparedStatement ps = null;
 
     //Add a student
-    /*public void addStudent(){
+    public void addStudent(){
 
         String query = " insert into student (student_ID, student_name, student_surname, student_age)"
                + " values (?, ?, ?, ?)";
@@ -74,10 +74,10 @@ public class Student{
         }
 
         System.out.println("Test: firstname: " + this.firstName + " secondname: " + this.secondName + " age: " + this.age);
-    }*/
+    }
 
     //Search for a Student
-    /*public String searchStudent(int studentID){
+    public String searchStudent(int studentID){
 
         String query = " SELECT * FROM student WHERE student_ID = ?";
         String fName = "";
@@ -94,8 +94,6 @@ public class Student{
             fName = result.getString("student_name");
             sName = result.getString("student_surname");
             age = result.getInt("student_age");
-
-
         }
         catch(SQLException e){
             System.out.println("Exception: " + e);
@@ -106,52 +104,54 @@ public class Student{
 
         return "FirstName: " + fName + "SecondName: " + sName + "Age: " + age;
 
-    }*/
+    }
 
     //Update a Student
-
     public String updateStudent(int userID, String firstName, String surname, int age){
 
+//        String query = "UPDATE student SET student_name = '?', student_surname = '?', student_age = '?' WHERE student_ID = ?";
+//
         StringBuilder query = new StringBuilder();
 
+        int parCount = 0;
+        boolean inFN = false;
+        boolean inSN = false;
+        boolean inAge = false;
+
         query.append("UPDATE student SET ");
-        if (firstName != ""){query.append("student_name = '?', ");}
-        if (surname != ""){query.append("student_surname = '?', ");}
-        if (age != 0){query.append("student_age = '?', ");}
+        if (firstName != ""){query.append("student_name = '?', "); parCount++; inFN = true;}
+        if (surname != ""){query.append("student_surname = '?', "); parCount++; inSN = true;}
+        if (age != 0){query.append("student_age = '?', "); parCount++; inAge = true;}
         query.setLength(Math.max(query.length() - 2, 0));
         query.append(" WHERE student_ID = ?");
 
+        try{
+            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
+            con = DriverManager.getConnection(url);
+            ps = con.prepareStatement(query.toString());
+            for(int i = 1; i <= parCount; i++){
+                if(inFN){ps.setString(i,firstName);}
+                if(inSN){ps.setString(i,surname);}
+                if(inAge){ps.setInt(i,age);}
+            }
 
-//        String query = "UPDATE student SET student_name = '?', student_surname = '?', student_age = '?' WHERE student_ID = ?";
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            System.out.println("Exception: " + e);
+        }
+        finally {
+            sqlCleanup(con,ps);
+        }
 
-//        try{
-//            String url = "jdbc:sqlite:path-to-db/chinook/chinook.db";
-//            con = DriverManager.getConnection(url);
-//            ps = con.prepareStatement(query);
-//            ps.setString(1,this.firstName);
-//            ps.setString(2,this.secondName);
-//            ps.setInt(3,this.age);
-//
-//            ps.executeUpdate();
-//
-//
-//        }
-//        catch(SQLException e){
-//            System.out.println("Exception: " + e);
-//        }
-//        finally {
-//            sqlCleanup(con,ps);
-//        }
-
-        return query.toString();
+        return "Student added to DB";
 
     }
 
-
-
-
-
-
+    //Remove a student
+    public String removeStudent(){
+        return "";
+    }
 
     public void sqlCleanup(Connection con, PreparedStatement ps){
         try{
