@@ -64,12 +64,5 @@ public class Main {
                 student.removeStudent(studentID);
         }
 
-
-
-	/*
-
-	switch case
-	if add student... instntiate student with default values..then call the add student method.... the add student method will add the student into the database.
-	 */
     }
 }
