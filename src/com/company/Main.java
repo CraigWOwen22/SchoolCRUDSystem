@@ -14,7 +14,7 @@ public class Main {
         userChoice = scan.nextLine();
 
         Student student;
-        int studentID;
+        int studentID = 0;
         String firstName="", secondName="";
         int age = 0;
         switch(userChoice){
@@ -38,23 +38,30 @@ public class Main {
             case "3":
                 System.out.println("Please enter students ID of which you would like to updated.");
                 studentID = scan.nextInt();
+                scan.nextLine();//Line added to consume the \n of above as the next int only consumes the int part of the line.
+
                 System.out.println("Please enter the new details of the student. Press enter to skip...");
-                System.out.println("Please enter the students new first name");
+                System.out.println("Please enter the students new first name. Press enter to skip...");
                 firstName = scan.nextLine();
-                System.out.println("Please enter the students new second name");
+
+                System.out.println("Please enter the students new second name. Press enter to skip...");
                 secondName = scan.nextLine();
-                System.out.println("Please enter the students new age");
+
+                System.out.println("Please enter the students new age. Enter '0' to skip");
                 age = scan.nextInt();
 
-                System.out.println("FirstName: " + firstName + " SecondName: " + secondName + " Age: " + age);
+                student = new Student();
+                student.updateStudent(studentID, firstName, secondName, age);
 
 
 //                System.out.println(student.updateStudent(1, "Craig", "Owen", 29));
 
             case "4":
-                //remove a student
-                //use search then delete to ask the user if they are sure.
-                //
+                System.out.println("Please enter students ID of which you would like to remove.");
+                studentID = scan.nextInt();
+
+                student = new Student();
+                student.removeStudent(studentID);
         }
 
 
